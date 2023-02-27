@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 const Weather = () => {
   const [city, setCity] = useState("");
   const [weather, setweather] = useState([]);
@@ -19,6 +18,7 @@ const Weather = () => {
   }, [city]);
   return (
     <div className="container" style={{textAlign:"center"}}>
+      <h1>Weather App</h1>
       <div style={{margin:"50px auto 0"}}>
         <input
           type="text"
