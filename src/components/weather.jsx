@@ -39,8 +39,7 @@ const Weather = () => {
                     <p>Ground level: {item.visibility}</p>
                   </div>
                 );
-              })
-            
+              })  
         }
       </div>
     </div>
