@@ -1,21 +1,45 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 const Weather = () => {
   const [city, setCity] = useState("");
   const [weather, setweather] = useState([]);
-  useEffect(() => {
+  const [valid, setvalid] = useState(true);
+  const [lastcity, setlastcity] = useState([]);
+  function fetchdata(){
+    if(city === ""){
+      setvalid(true)
+      setweather([])
+    }else{
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3bc904f99bdc19d6811d3f46e5850904`
     )
       .then((res) => {
         return res.json();
       })
-      .then((data) => {
-        setweather([data])
+      .then((data) => { 
+        console.log(data);
+        if(data.cod === 200){
+          setvalid(true)
+          setweather([data])
+          if(lastcity.length === 3){
+            lastcity.push(city)
+            lastcity.shift();
+            setlastcity([...lastcity])
+          }else{
+            lastcity.push(city)
+            setlastcity([...lastcity])
+          }
+        }else{
+          setvalid(false)
+          setweather([])
+        }
       })
       .catch((e) => {
         console.log(e);
       });
-  }, [city]);
+    }
+  };
+  console.log(valid); 
+  console.log(lastcity);
   return (
     <div className="container" style={{textAlign:"center"}}>
       <h1>Weather App</h1>
@@ -23,23 +47,35 @@ const Weather = () => {
         <input
           type="text"
           placeholder="search for city..."
-          onChange={(e) => {setCity(e.target.value)}}
+          onChange={(e) => setCity(e.target.value)}
         />
+        <button onClick={fetchdata}>search</button>
       </div>
       <div style={{height:"300px",width:"300px",border:"2px solid red",margin:"20px auto 0"}}>
         {
-            !city? <div><p>please enter valid city</p></div>: weather.map((item, i) => {
+            !valid? <div><p>please enter valid city</p></div>: weather.map((item, i) => {
                 return (
                   <div key={i}>
                     <p>Weather Details of City: {item.name}</p>
-                    <p>Current Temperature: {item.cod - 170} &#8451;</p>
-                    <p>Temperature Range: {item.cod - 180} &#8451; to {item.cod - 170} &#8451;</p>
-                    <p>Humidity: {item.cod - 164}</p>
+                    <p>Current Temperature: {Math.floor(item.main.temp-273)} &#8451;</p>
+                    <p>Temperature Range: {Math.floor(item.main.temp_min-273)} &#8451; to {Math.floor(item.main.temp_max-273)} &#8451;</p>
+                    <p>Humidity: {item.main.humidity}</p>
                     <p>Sea level: {item.timezone}</p>
                     <p>Ground level: {item.visibility}</p>
                   </div>
                 );
               })  
+        }
+      </div>
+      <div className="lastcities">
+        {
+          lastcity.map((c, i)=>{
+            return(
+              <div key={i}>
+                  <p>{c}</p>
+              </div>
+            )
+          })
         }
       </div>
     </div>
