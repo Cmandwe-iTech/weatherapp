@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../App.css"
 const Weather = () => {
   const [city, setCity] = useState("");
   const [weather, setweather] = useState([]);
@@ -21,11 +22,11 @@ const Weather = () => {
           setvalid(true)
           setweather([data])
           if(lastcity.length === 3){
-            lastcity.push(city)
+            lastcity.push(data.name)
             lastcity.shift();
             setlastcity([...lastcity])
           }else{
-            lastcity.push(city)
+            lastcity.push(data.name)
             setlastcity([...lastcity])
           }
         }else{
@@ -43,7 +44,7 @@ const Weather = () => {
   return (
     <div className="container" style={{textAlign:"center"}}>
       <h1>Weather App</h1>
-      <div style={{margin:"50px auto 0"}}>
+      <div style={{margin:"20px auto 0"}}>
         <input
           type="text"
           placeholder="search for city..."
@@ -51,11 +52,11 @@ const Weather = () => {
         />
         <button onClick={fetchdata}>search</button>
       </div>
-      <div style={{height:"300px",width:"300px",border:"2px solid red",margin:"20px auto 0"}}>
+      <div style={{height:"300px",width:"400px",border:"2px solid yellow",margin:"20px auto 0",background:"lightgreen"}}>
         {
-            !valid? <div><p>please enter valid city</p></div>: weather.map((item, i) => {
+            !valid? <div><p style={{fontSize:"20px",color:"red"}}>please enter valid city</p></div>: weather.map((item, i) => {
                 return (
-                  <div key={i}>
+                  <div key={i} className="p">
                     <p>Weather Details of City: {item.name}</p>
                     <p>Current Temperature: {Math.floor(item.main.temp-273)} &#8451;</p>
                     <p>Temperature Range: {Math.floor(item.main.temp_min-273)} &#8451; to {Math.floor(item.main.temp_max-273)} &#8451;</p>

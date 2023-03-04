@@ -36,3 +36,37 @@
     transform: rotate(360deg);
   }
 }
+h1{
+  color: rgb(4, 70, 70);
+}
+input{
+  height: 30px;
+  width: 230px;
+  background: silver;
+  color: blueviolet;
+  font-size: 20px;
+}
+button{
+  height: 35px;
+  color: rgb(14, 83, 151);
+  font-size: 15px;
+  position: relative;
+  bottom: 2px;
+}
+.lastcities{
+  margin: 10px auto 0;
+  box-sizing: border-box;
+  padding: 20px;
+  height: 200px;
+  width: 200px;
+  font-size: 18px;
+  background: linear-gradient(rgb(232, 197, 197), rgb(165, 165, 201), rgb(201, 201, 164));
+}
+.p p{
+  font-size: 18px;
+  font-family: sans-serif;
+  color: rgb(2, 67, 67);
+}
+body{
+  background: #61dafb;
+}
