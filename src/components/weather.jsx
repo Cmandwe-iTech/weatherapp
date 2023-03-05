@@ -54,7 +54,7 @@ const Weather = () => {
       </div>
       <div style={{height:"300px",width:"400px",border:"2px solid yellow",margin:"20px auto 0",background:"lightgreen"}}>
         {
-            !valid? <div><p style={{fontSize:"20px",color:"red"}}>please enter valid city</p></div>: weather.map((item, i) => {
+            !valid && city? <div><p style={{fontSize:"20px",color:"red"}}>please enter valid city</p></div>: weather.map((item, i) => {
                 return (
                   <div key={i} className="p">
                     <p>Weather Details of City: {item.name}</p>
