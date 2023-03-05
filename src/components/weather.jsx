@@ -69,6 +69,7 @@ const Weather = () => {
         }
       </div>
       <div className="lastcities">
+        <h3>Last Three Searches</h3>
         {
           lastcity.map((c, i)=>{
             return(
