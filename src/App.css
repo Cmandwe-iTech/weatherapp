@@ -57,8 +57,8 @@ button{
   margin: 10px auto 0;
   box-sizing: border-box;
   padding: 2px;
-  height: 200px;
-  width: 200px;
+  height: 250px;
+  width: 250px;
   font-size: 18px;
   background: linear-gradient(rgb(232, 197, 197), rgb(165, 165, 201), rgb(201, 201, 164));
 }
